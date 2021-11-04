@@ -1,3 +1,4 @@
+from bson.objectid import ObjectId
 from flask import Blueprint, request, session, redirect, url_for, flash
 from flask.templating import render_template
 from ..extentions.database import mongo
@@ -49,9 +50,58 @@ def insetProduct():
     return redirect(url_for("product.listProducts"))
 
 
-@product.route('/edit')
+@product.route('/edit', methods=["GET", "POST"])
 def editProduct():
-    return "edit"
+    if request.method == "GET":
+        idProduto = request.values.get("idproduto")
+
+        if not idProduto:
+            flash("Campo 'idproduto' é obrigatório.")
+            return redirect(url_for("product.listProducts"))
+        else:
+            idprod = mongo.db.products.find({"_id": ObjectId(idProduto)})
+            produto = [prd for prd in idprod]
+            estoques = set()
+            produtos = mongo.db.products.find()
+            for p in produtos:
+                estoques.add(p['estoque'])
+            return render_template("produtos/edit.html", produto=produto, estoques=estoques)
+    else:
+        idProduto = request.form.get("idproduto")
+        nome = request.form.get("nome")
+        categoria = request.form.get("categoria")
+        estoque = request.form.get("estoque")
+        preco = request.form.get("preco")
+        quantidade = request.form.get("quantidade")
+
+        if not idProduto:
+            print("id>>>", idProduto)
+            flash("Campo 'idproduto' é obrigatório.")
+        elif not nome:
+            flash("Campo 'nome' é o brigatório.")
+        elif not quantidade:
+            flash("Campo 'quantidade' é obrigatório.")
+        elif not categoria:
+            flash("Campo 'categoria' é obrigatório.")
+        elif not preco:
+            flash("Campo 'preço' é obrigatório.")
+        elif not estoque:
+            flash("Campo 'estoque' é obrigatório.")
+        else:
+            mongo.db.products.update(
+                {"_id": ObjectId(idProduto)},
+                {
+                    "$set": {
+                        "produto": nome,
+                        "quantidade": quantidade,
+                        "preco": preco,
+                        "categoria": categoria,
+                        "estoque": estoque,
+                        "valor total": (float(quantidade) * float(preco))
+                    }
+                })
+            flash("Produto alterado com sucesso!")
+        return redirect(url_for("product.listProducts"))
 
 
 @product.route('/delete')

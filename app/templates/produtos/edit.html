@@ -18,18 +18,18 @@
                         {% endif %}
                     {% endwith %}
 
-                    <form action="{{ url_for('produto.editarProduto') }}" method="post">
+                    <form action="{{ url_for('product.editProduct') }}" method="post">
                         <input type="hidden" name="idproduto" value="{{ produto[0]['_id'] }}" id="idproduto" class="form-control" placeholder="Id do Produto" required>
 
                         <label for="nome" class="visually-hidden">Nome:</label>
                         <input type="text" name="nome" value="{{ produto[0]['produto'] }}" id="nome" class="form-control" placeholder="Nome do Produto" required autofocus>
-                        
+
                         <label for="quantidade" class="visually-hidden">Quantidade:</label>
                         <input type="number" name="quantidade" value="{{ produto[0]['quantidade'] }}" id="quantidade" class="form-control" placeholder="Quantidade" required>
 
                         <label for="nome" class="visually-hidden">Preco:</label>
                         <input type="text" data-type="currency" name="preco" value="{{ produto[0]['preco'] }}" id="preco" class="form-control" placeholder="Nome do Produto" required autofocus>
-                        
+
                         <label for="categoria" class="visually-hidden">Categoria</label>
                         <select class="form-select" name="categoria" id="categoria">
                             <option value="Placeholder" selected disabled>Selecione uma categoria</option>
