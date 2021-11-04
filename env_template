@@ -1,0 +1,4 @@
+FLASK_APP=app/app.py
+FLASK_ENV=development
+MONGO_URI=xxxxxxxx
+SECRET_KEY=xxxxxxxxxx
