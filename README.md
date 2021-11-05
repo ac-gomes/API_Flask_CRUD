@@ -1,6 +1,6 @@
 # API Flask - CRUD e MongoDB
 
-Reposiório dedicado ao Hands-on Python realizado pela 4Linux Open Software.
+Repositório dedicado ao Hands-on Python realizado pela 4Linux Open Software.
 
 ## Principais tópicos
 
@@ -16,4 +16,4 @@ Reposiório dedicado ao Hands-on Python realizado pela 4Linux Open Software.
 [2 -Hands-on Python : Criando Projeto de Crud com flask e mongodb.](https://www.youtube.com/watch?v=j5i36Jj2CSQ)
 
 ## Observações
-- Durante o acompanhamento fiz pequenas alterações no nome das funções/rotas para compriender a passagem de variáveis para os templetes gerados pelo **Jinja**, no mais o projeto permanece conforme passado no treinamento.
+- Durante o acompanhamento fiz pequenas alterações no nome das funções/rotas para compreender a passagem de variáveis para os templetes gerados pelo **Jinja**, no mais o projeto permanece conforme passado no treinamento.
