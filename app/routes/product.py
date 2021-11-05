@@ -75,7 +75,6 @@ def editProduct():
         quantidade = request.form.get("quantidade")
 
         if not idProduto:
-            print("id>>>", idProduto)
             flash("Campo 'idproduto' é obrigatório.")
         elif not nome:
             flash("Campo 'nome' é o brigatório.")
@@ -106,4 +105,11 @@ def editProduct():
 
 @product.route('/delete')
 def deleteProduct():
-    return "delete"
+    idproduto = request.values.get("idproduto")
+    print(idproduto)
+    if not idproduto:
+        flash("campo 'idproduto' é obrigatório")
+    else:
+        mongo.db.products.delete_one({"_id": ObjectId(idproduto)})
+        flash("Produto deletado com sucesso!")
+    return redirect(url_for("product.listProducts"))

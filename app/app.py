@@ -4,6 +4,7 @@ from .routes.product import product
 from .extentions import database
 from .commands.userCommands import userCommands
 from .config.hellpers import config
+from .commands.productCommands import product_cm
 
 
 def create_app():
@@ -13,8 +14,7 @@ def create_app():
     app.register_blueprint(User)
     app.register_blueprint(product)
     app.register_blueprint(userCommands)
-    # app.secret_key = os.urandom(12)
-
+    app.register_blueprint(product_cm)
     database.init_app(app)
 
     return app
